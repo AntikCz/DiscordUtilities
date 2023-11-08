@@ -1,5 +1,6 @@
 { 
 "DiscordInvite": {
+    "Enabled": true,
     "Keywords": [ 
       "disc",
       "discord",
@@ -23,7 +24,7 @@
       "admin",
       "test"
     ],
-"Discord": {
+    "Discord": {
       "Enabled": true,
       "SenderName": "Notifier",
       "URL": "https://discord.com/api/webhooks/1166239304079646771/Q4IrrOlZh37_eSJnNzyzsCx6v6wJAphlfYRn9lUZSA1vcNbW3iCdSUpfSa-9b_HzUxiS"

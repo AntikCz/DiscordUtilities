@@ -1,0 +1,33 @@
+{ 
+"DiscordInvite": {
+    "Enabled": true, // enable or disable sending invite message
+    "Keywords": [    //list of trigger keywords for invite message
+      "disc",
+      "discord",
+      "link"
+    ],
+    "InviteMsg": "Link here: discord.gg/zbWanaC9De",   // message posted to game 
+    "MsgColor": [
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ]
+  },  
+"TagNotifier": {      // not enabled yet
+    "DiscordRole": [
+      "936715020350414900",
+      "415348784818814976"
+    ],
+    "Keywords": [   //list of trigger keywords for ping on discord
+      "antik",
+      "admin",
+      "test"
+    ],
+    "Discord": {
+      "Enabled": true, // enable or disable pings
+      "SenderName": "Servernamehere", // server name 
+      "URL": "https://discord.com/api/webhooks/1166239304079646771/Q4IrrOlZh37_eSJnNzyzsCx6v6wJAphlfYRn9lUZSA1vcNbW3iCdSUpfSa-9b_HzUxiS" // discord webhook for pings
+    }
+  }
+}

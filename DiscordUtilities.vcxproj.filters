@@ -33,4 +33,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="DiscordUtilities\config.json">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="DiscordUtilities\config commented.json">
+      <Filter>Resource Files</Filter>
+    </None>
+  </ItemGroup>
 </Project>

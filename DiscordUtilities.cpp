@@ -6,26 +6,38 @@
 #include <ArkApiUtils.h>
 #include <macros.h>
 
-void PostToDiscord(const std::wstring log)
 
+void PostToDiscord(const std::wstring log)
 {
 	if (!discord_enabled || discord_webhook_url.IsEmpty())
 		return;
-	//Format of message sent to discord with the role ping <@&936715020350414900>
-	FString msg = L"{{\"content\":\"<@&936715020350414900> ```stylus\\n{}```\",\"username\":\"{}\",\"avatar_url\":null}}";
-	//Original format message
-	// FString msg = L"{{\"content\":\"```stylus\\n{}```\",\"username\":\"{}\",\"avatar_url\":null}}";
+
+	const auto& tagNotifierConfig = PluginConfig["TagNotifier"];
+	const auto& discordRoles = tagNotifierConfig["DiscordRole"];
+
+	FString roleMentions;
+	for (const auto& discordRole : discordRoles)
+	{
+		if (discordRole.is_string()) {
+			const std::string roleValue = discordRole.get<std::string>();
+			roleMentions += L"<@&" + FString(roleValue.c_str()) + L"> ";
+		}
+	}
+
+	FString msg = L"{{\"content\":\"" + roleMentions + L"```stylus\\n{}```\",\"username\":\"{}\",\"avatar_url\":null}}";
 	FString output = FString::Format(*msg, log, discord_sender_name);
+
 	static_cast<AShooterGameState*>(ArkApi::GetApiUtils().GetWorld()->GameStateField())->HTTPPostRequest(discord_webhook_url, output);
 }
 
 
+
 void DiscordInvMessage(AShooterPlayerController* player)
 {
+	if (!Tag_enabled)
+		return;
 	try
 	{
-
-
 		std::wstring msg = ArkApi::Tools::Utf8Decode(PluginConfig["DiscordInvite"]["InviteMsg"]);
 		auto config_color = PluginConfig["DiscordInvite"]["MsgColor"];
 		const FLinearColor color{ config_color[0], config_color[1], config_color[2], config_color[3] };
@@ -115,13 +127,7 @@ BOOL Load()
 
 	try
 	{
-		LoadConfig();
-
-		//Discord Functions
-		const auto& discord_config = PluginConfig["TagNotifier"].value("Discord", nlohmann::json::object());
-		discord_enabled = discord_config.value("Enabled", false);
-		discord_sender_name = discord_config.value("SenderName", "").c_str();
-		discord_webhook_url = discord_config.value("URL", "").c_str();
+		LoadConfig();		
 	}
 	catch (const std::exception& error)
 	{
