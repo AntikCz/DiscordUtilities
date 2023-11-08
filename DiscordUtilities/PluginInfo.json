@@ -1,0 +1,6 @@
+{
+    "FullName": "Discord Utilities by Antik",
+    "Description": "Discord link in chat and ping to webhook",
+    "Version": 1.0,
+    "MinApiVersion": 3.54
+}
